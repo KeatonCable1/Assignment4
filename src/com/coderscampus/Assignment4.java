@@ -1,6 +1,11 @@
 package com.coderscampus;
 
-	import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Arrays;
 	
 public class Assignment4 {
 
@@ -30,24 +35,55 @@ public class Assignment4 {
 		}
 		
 		if (course1Count > 0) {
-			sortArrayByGrade(course1List, course1Count);
+			Arrays.sort(course1List);
 		}
 		if (course2Count > 0) {
-			sortArrayByGrade(course2List, course2Count);
+			Arrays.sort(course2List);
 		}
 		if (course3Count > 0) {
-			sortArrayByGrade(course3List, course3Count);
+			Arrays.sort(course3List);
 		}
+	   
 		
+		writeToFile("course1.csv", course1List, course1Count);
+        writeToFile("course2.csv", course2List, course2Count);
+        writeToFile("course3.csv", course3List, course3Count);
+	
 	}
 
-	private static void sortArrayByGrade(String[] studentArray, int count) {
+	public static String[] readStudentMasterList(String filename) {
+		 String[] lines = new String[1000];
 		
-		
-	}
-
+		 int lineCount = 0;
 	
 
+	  try (BufferedReader br = new BufferedReader(new FileReader("studentmasterlist.csv"))) {
+          String line;
+          while ((line = br.readLine()) != null) {
+              lines[lineCount++] = line;
+          }
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
 
-	
+  
+      return Arrays.copyOf(lines, lineCount);
+  }
+
+  public static void writeToFile(String filename, String[] studentArray, int count) {
+      try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+          writer.write("Student ID,Student Name,Course,Grade\n");
+          for (int i = 0; i < count; i++) {
+              writer.write(studentArray[i] + "\n");
+          }
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
+  }
 }
+
+	
+
+
+	
+
