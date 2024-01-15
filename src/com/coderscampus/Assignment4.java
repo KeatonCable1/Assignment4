@@ -11,7 +11,7 @@ public class Assignment4 {
 
 	public static void main(String[] args) {
 		
-		String[] lines = readStudentMasterList("studentmasterlist.csv");
+		String[] lines = readStudentMasterList("student-master-list");
 		
 		String[] course1List = new String[lines.length];
 		String[] course2List = new String[lines.length];
@@ -57,7 +57,7 @@ public class Assignment4 {
 		 int lineCount = 0;
 	
 
-	  try (BufferedReader br = new BufferedReader(new FileReader("studentmasterlist.csv"))) {
+	  try (BufferedReader br = new BufferedReader(new FileReader("student-master-list"))) {
           String line;
           while ((line = br.readLine()) != null) {
               lines[lineCount++] = line;
